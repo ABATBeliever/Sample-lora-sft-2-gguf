@@ -1,0 +1,14 @@
+# git が入っていない場合は 
+# winget install --id Git.Git -e --source winget
+
+git clone https://github.com/ggml-org/llama.cpp
+cd llama.cpp
+python convert_hf_to_gguf.py ../merged_model --outfile ../model-fp16.gguf
+cd ../
+
+# https://github.com/ggml-org/llama.cpp/releases/
+# から、「llama-bxxxxx-bin-win-cpu-x64.zip」(xxxxxは最新版)をダウンロードし、展開し、
+# 「llama-bxxxxx-bin-win-cpu-x64」フォルダをこのリポジトリと同じ場所においてください。
+# 下のコマンドの最後の「Q4_K_M」をいじることで、量子化の度合いを変更できます。
+
+call "llama-bxxxxx-bin-win-cpu-x64/llama-quantize.exe" ./model-fp16.gguf ./Qwen2.5-0.5B_Instruct_UNOFFICIAL-YOUR-SUPER-MODEL-q4-k-m.gguf Q4_K_M

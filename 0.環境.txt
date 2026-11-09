@@ -1,0 +1,12 @@
+# Astral uv (Pythonの管理ツール)をセットアップ
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# 仮想環境作成
+uv venv --python 3.11
+
+# 仮想環境に入る (CUIを開くときは毎回実行すること)
+.venv\Scripts\activate
+
+# 依存関係
+uv pip install torch --index-url https://download.pytorch.org/whl/cpu
+uv pip install transformers datasets peft trl sentencepiece pandas
